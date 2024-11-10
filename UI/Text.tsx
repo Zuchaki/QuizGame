@@ -9,6 +9,7 @@ const textStyles = cva('', {
       title: 'font-nunitoSans text-6xl',
       titleS: 'font-inter text-6xl',
       'body-m': 'font-nunitoSans',
+      'body-caption': 'font-nunitoSans text-caption',
     },
   },
   defaultVariants: {

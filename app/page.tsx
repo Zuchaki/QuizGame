@@ -14,7 +14,7 @@ export default function Home() {
     [],
   );
   const getRandomizedArray = () => {
-    const numbers = Array.from({ length: 80 }, (_, i) => i + 1);
+    const numbers = Array.from({ length: 39 }, (_, i) => i + 1);
     for (let i = numbers.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [numbers[i], numbers[j]] = [numbers[j], numbers[i]]; // Zamiana miejscami
@@ -39,7 +39,7 @@ export default function Home() {
   } = currentQuiz ?? {};
 
   const handleNextQuestion = () => {
-    if (step === 5) {
+    if (step === 4) {
       setStep(0);
       return setCurrentQuestion((prev) => prev + 1);
     }
@@ -53,31 +53,32 @@ export default function Home() {
           <div className="flex w-full flex-row gap-3">
             <Step isEnabled={step >= 0} stepName="Pierwsze" />
             <Step isEnabled={step >= 1} stepName="Categoria" />
-            <Step isEnabled={step >= 2} stepName="A i B" />
-            <Step isEnabled={step >= 3} stepName="C i D" />
-            <Step isEnabled={step >= 4} stepName="Pytanie" />
-            <Step isEnabled={step >= 5} stepName="Odpowiedz" />
+            <Step isEnabled={step >= 2} stepName="Pytanie" />
+            <Step isEnabled={step >= 3} stepName="A i B i C i D" />
+            <Step isEnabled={step >= 4} stepName="Odpowiedz" />
           </div>
         </div>
+      </div>
+      <div className="flex w-full flex-row items-end gap-5">
+        <Block value={Category} block="Categoria" isOpen={step >= 1} />{' '}
         <Button type="primary" onClick={() => handleNextQuestion()}>
           Nastepny Krok
         </Button>
       </div>
-      <Block value={Category} block="Categoria" isOpen={step >= 1} />
-      <Block value={Question} block="Pytanie" isOpen={step >= 4} />
+      <Block value={Question} block="Pytanie" isOpen={step >= 2} />
       <div className="flex w-full flex-col gap-3">
         <div className="flex flex-row gap-5">
           <Block
             value={AnswerA}
             block="A"
-            isOpen={step >= 2}
-            correctAnswer={step >= 5 && CorrectAnswer === 'A'}
+            isOpen={step >= 3}
+            correctAnswer={step >= 4 && CorrectAnswer === 'A'}
           />
           <Block
             value={AnswerB}
             block="B"
-            isOpen={step >= 2}
-            correctAnswer={step >= 5 && CorrectAnswer === 'B'}
+            isOpen={step >= 3}
+            correctAnswer={step >= 4 && CorrectAnswer === 'B'}
           />
         </div>
         <div className="flex flex-row gap-5">
@@ -85,13 +86,13 @@ export default function Home() {
             value={AnswerC}
             block="C"
             isOpen={step >= 3}
-            correctAnswer={step >= 5 && CorrectAnswer === 'C'}
+            correctAnswer={step >= 4 && CorrectAnswer === 'C'}
           />
           <Block
             value={AnswerD}
             block="D"
             isOpen={step >= 3}
-            correctAnswer={step >= 5 && CorrectAnswer === 'D'}
+            correctAnswer={step >= 4 && CorrectAnswer === 'D'}
           />
         </div>
       </div>
@@ -133,7 +134,9 @@ const Step = ({
         '!bg-green-800': isEnabled,
       })}
     >
-      <Text className=" text-neutral-400">{stepName}</Text>
+      <Text variant="body-caption" className=" text-neutral-400">
+        {stepName}
+      </Text>
     </div>
   );
 };
