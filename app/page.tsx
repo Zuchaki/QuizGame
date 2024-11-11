@@ -14,7 +14,7 @@ export default function Home() {
     [],
   );
   const getRandomizedArray = () => {
-    const numbers = Array.from({ length: 39 }, (_, i) => i + 1);
+    const numbers = Array.from({ length: quiz.length - 1 }, (_, i) => i + 1);
     for (let i = numbers.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [numbers[i], numbers[j]] = [numbers[j], numbers[i]]; // Zamiana miejscami
